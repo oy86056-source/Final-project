@@ -1,0 +1,49 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+npm-debug.log*
+pnpm-debug.log*
+.yarn/
+.pnpm-store/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Build / runtime
+dist/
+build/
+coverage/
+.cache/
+tmp/
+temp/
+
+# Generated media
+generated_videos/
+generated_audio/
+generated_images/
+
+# Docker
+*.pid
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
