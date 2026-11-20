@@ -36,6 +36,7 @@ async function main() {
   await github.ensureBranch('ora-queue', 'main');
 
   const { request, path } = await store.readRequest(requestId, requestPath);
+  const prior = await store.getTask(requestId);
   const task = validateRequest({ ...request, id: requestId });
   const controller = new AbortController();
   const events = [];
@@ -69,6 +70,7 @@ async function main() {
     error: null,
     verification: null,
     worker: { runId, runUrl, provider: 'github-actions', sandbox: 'isolated' },
+    attempts: Number(prior?.attempts || 0),
     requestPath: path
   };
 
