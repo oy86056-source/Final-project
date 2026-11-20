@@ -1,0 +1,31 @@
+{
+  "name": "openruntimeagent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "OpenRuntimeAgent: a repo-aware autonomous development runtime",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "bin": {
+    "ora": "./bin/ora.js"
+  },
+  "exports": {
+    ".": "./index.js"
+  },
+  "scripts": {
+    "test": "node --test",
+    "test:unit": "node --test tests/unit",
+    "test:integration": "node --test tests/integration tests/security tests/e2e",
+    "check": "node scripts/check.js",
+    "smoke": "node scripts/smoke.js",
+    "ui": "node bin/ora.js ui",
+    "deploy:sync": "node scripts/sync-source.js",
+    "deploy:workflows": "node scripts/deploy-workflows.js",
+    "deploy:pages": "node scripts/deploy-pages.js",
+    "deploy:cloud": "node scripts/sync-source.js && node scripts/deploy-workflows.js && node scripts/deploy-pages.js",
+    "cloud:worker": "node scripts/cloud-worker.js",
+    "cloud:recover": "node scripts/cloud-recovery.js"
+  },
+  "license": "MIT"
+}

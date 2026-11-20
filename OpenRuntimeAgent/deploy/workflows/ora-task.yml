@@ -1,0 +1,44 @@
+name: ORA Task Worker
+
+on:
+  workflow_dispatch:
+    inputs:
+      task_id:
+        description: 'Task id (task-...)'
+        required: true
+        type: string
+      request_path:
+        description: 'Path of the task request on ora-queue'
+        required: false
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: ora-task-${{ inputs.task_id }}
+  cancel-in-progress: false
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out application source
+        uses: actions/checkout@v4
+        with:
+          ref: ora-app
+          fetch-depth: 1
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Run OpenRuntimeAgent in the isolated workspace
+        working-directory: OpenRuntimeAgent
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          ORA_TASK_ID: ${{ inputs.task_id }}
+          ORA_REQUEST_PATH: ${{ inputs.request_path }}
+        run: node scripts/cloud-worker.js
