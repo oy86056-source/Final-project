@@ -1,4 +1,15 @@
 {
   "version": 1,
-  "tasks": []
+  "tasks": [
+    {
+      "id": "task-cloud-smoke-20261120",
+      "title": "cloud smoke verification",
+      "status": "running",
+      "goal": "Create a note in the sandbox and verify the repository",
+      "createdAt": "2026-11-20T11:21:05.007Z",
+      "updatedAt": "2026-11-20T11:24:37.765Z",
+      "finishedAt": null,
+      "mode": "offline-deterministic"
+    }
+  ]
 }
