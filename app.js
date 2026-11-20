@@ -190,7 +190,6 @@
         method: 'POST',
         body: {
           event_type: 'ora-task',
-          ref: 'main',
           client_payload: { task_id: id, request_path: `requests/${id}.json` }
         }
       });
