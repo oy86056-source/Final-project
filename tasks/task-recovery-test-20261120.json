@@ -2,31 +2,43 @@
   "id": "task-recovery-test-20261120",
   "title": "recovery test",
   "goal": "verify recovered execution",
-  "status": "queued",
+  "spec": {
+    "files": [
+      {
+        "path": "notes/recovered.md",
+        "content": "Recovered worker output\n",
+        "reason": ""
+      }
+    ],
+    "verification": {
+      "command": "npm run check",
+      "reason": ""
+    }
+  },
+  "status": "running",
   "mode": "offline-deterministic",
+  "llmConfigured": false,
+  "requestedBy": "recovery-verification",
   "createdAt": "2026-11-20T11:31:00.240Z",
-  "startedAt": "2026-11-20T11:31:00.240Z",
+  "startedAt": "2026-11-20T11:36:13.392Z",
+  "finishedAt": null,
+  "updatedAt": "2026-11-20T11:36:13.427Z",
   "progress": {
     "step": 0,
     "total": 0,
-    "label": "recovered — waiting for worker"
+    "label": "starting"
   },
   "steps": [],
-  "events": [
-    {
-      "ts": "2026-11-20T11:36:01.903Z",
-      "type": "task:recovered",
-      "message": "Requeued after worker interruption (attempt 1)"
-    }
-  ],
+  "events": [],
   "changedFiles": [],
   "result": null,
   "error": null,
-  "requestPath": "requests/task-recovery-test-20261120.json",
+  "verification": null,
   "worker": {
-    "runId": "44727663343",
-    "provider": "github-actions"
+    "runId": "44728933040",
+    "runUrl": "https://github.com/oy86056-source/Final-project/actions/runs/44728933040",
+    "provider": "github-actions",
+    "sandbox": "isolated"
   },
-  "attempts": 1,
-  "updatedAt": "2026-11-20T11:36:01.903Z"
+  "requestPath": "requests/task-recovery-test-20261120.json"
 }
