@@ -1,0 +1,20 @@
+{
+  "id": "task-cloud-verify-20261120",
+  "title": "cloud verification",
+  "goal": "Create a note in the sandbox and verify the repository",
+  "spec": {
+    "files": [
+      {
+        "path": "notes/verified.md",
+        "content": "# Verified\n\nReal cloud execution.\n",
+        "reason": "verify real file write"
+      }
+    ],
+    "verification": {
+      "command": "npm run check",
+      "reason": "verify sandbox syntax"
+    }
+  },
+  "requestedBy": "deployment-verification",
+  "createdAt": "2026-11-20T11:26:12.809Z"
+}
