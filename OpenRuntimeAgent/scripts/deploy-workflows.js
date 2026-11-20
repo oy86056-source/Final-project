@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
-import { resolve, fileURLToPath } from 'node:path';
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { createGitHubClient } from '../cloud/github.js';
 
 const ROOT = resolve(fileURLToPath(new URL('..', import.meta.url)));
