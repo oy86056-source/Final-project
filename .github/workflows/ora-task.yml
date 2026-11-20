@@ -1,6 +1,8 @@
 name: ORA Task Worker
 
 on:
+  repository_dispatch:
+    types: [ora-task]
   workflow_dispatch:
     inputs:
       task_id:
@@ -18,7 +20,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: ora-task-${{ inputs.task_id }}
+  group: ora-task-${{ inputs.task_id || github.event.client_payload.task_id }}
   cancel-in-progress: false
 
 jobs:
@@ -39,6 +41,6 @@ jobs:
         working-directory: OpenRuntimeAgent
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          ORA_TASK_ID: ${{ inputs.task_id }}
-          ORA_REQUEST_PATH: ${{ inputs.request_path }}
+          ORA_TASK_ID: ${{ inputs.task_id || github.event.client_payload.task_id }}
+          ORA_REQUEST_PATH: ${{ inputs.request_path || github.event.client_payload.request_path }}
         run: node scripts/cloud-worker.js
