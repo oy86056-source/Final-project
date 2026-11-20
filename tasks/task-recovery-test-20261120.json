@@ -15,18 +15,18 @@
       "reason": ""
     }
   },
-  "status": "running",
+  "status": "completed",
   "mode": "offline-deterministic",
   "llmConfigured": false,
   "requestedBy": "recovery-verification",
   "createdAt": "2026-11-20T11:31:00.240Z",
   "startedAt": "2026-11-20T11:36:13.392Z",
-  "finishedAt": null,
-  "updatedAt": "2026-11-20T11:36:26.212Z",
+  "finishedAt": "2026-11-20T11:36:28.866Z",
+  "updatedAt": "2026-11-20T11:36:28.866Z",
   "progress": {
     "step": 5,
     "total": 5,
-    "label": "Review working tree changes (ok)"
+    "label": "completed"
   },
   "steps": [
     {
@@ -374,17 +374,54 @@
       "taskId": null,
       "tool": null,
       "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:28.863Z",
+      "type": "task:status",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:28.865Z",
+      "type": "task:finished",
+      "taskId": null,
+      "tool": null,
+      "message": ""
     }
   ],
-  "changedFiles": [],
-  "result": null,
+  "changedFiles": [
+    {
+      "path": "notes/recovered.md",
+      "action": "created",
+      "before": null,
+      "after": "Recovered worker output\n"
+    }
+  ],
+  "result": {
+    "summary": "Completed 5 steps with no failed tool executions",
+    "success": true,
+    "durationMs": 12755,
+    "checkpoints": [
+      "ckpt-mwowldz9-1cdc6a75",
+      "ckpt-mwowlhrt-16c2c2f3"
+    ],
+    "conflicts": [],
+    "reviews": []
+  },
   "error": null,
-  "verification": null,
+  "verification": {
+    "command": "npm run check",
+    "ok": true,
+    "exitCode": 0,
+    "output": "{\"ok\":true,\"exitCode\":0,\"signal\":null,\"error\":null,\"stdout\":\"\\n> ora-cloud-sandbox@1.0.0 check\\n> node --check index.js\\n\\n\",\"stderr\":\"\",\"truncated\":false,\"timedOut\":false,\"durationMs\":109,\"command\":\"npm run check\"}"
+  },
   "worker": {
     "runId": "44728933040",
     "runUrl": "https://github.com/oy86056-source/Final-project/actions/runs/44728933040",
     "provider": "github-actions",
     "sandbox": "isolated"
   },
-  "requestPath": "requests/task-recovery-test-20261120.json"
+  "requestPath": "requests/task-recovery-test-20261120.json",
+  "internalTaskId": "task-mwowlbzh-89ab29d9"
 }
