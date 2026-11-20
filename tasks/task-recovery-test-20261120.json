@@ -22,11 +22,11 @@
   "createdAt": "2026-11-20T11:31:00.240Z",
   "startedAt": "2026-11-20T11:36:13.392Z",
   "finishedAt": null,
-  "updatedAt": "2026-11-20T11:36:21.070Z",
+  "updatedAt": "2026-11-20T11:36:23.609Z",
   "progress": {
-    "step": 3,
+    "step": 4,
     "total": 5,
-    "label": "Write notes/recovered.md (ok)"
+    "label": "Verify: npm run check (ok)"
   },
   "steps": [
     {
@@ -58,6 +58,16 @@
       "denied": false,
       "error": null,
       "output": "{\"path\":\"notes/recovered.md\",\"action\":\"created\",\"beforeHash\":null,\"afterHash\":\"1251282276\",\"backupPath\":null,\"diff\":\"--- a/notes/recovered.md\\n+++ b/notes/recovered.md\\n@@ -1,1 +1,2 @@\\n+Recovered worker output\\n \\n\"}"
+    },
+    {
+      "id": "step-mwowlhog-ba577a3c",
+      "title": "Verify: npm run check",
+      "tool": "shell.exec",
+      "role": "tester",
+      "ok": true,
+      "denied": false,
+      "error": null,
+      "output": "{\"ok\":true,\"exitCode\":0,\"signal\":null,\"error\":null,\"stdout\":\"\\n> ora-cloud-sandbox@1.0.0 check\\n> node --check index.js\\n\\n\",\"stderr\":\"\",\"truncated\":false,\"timedOut\":false,\"durationMs\":109,\"command\":\"npm run check\"}"
     }
   ],
   "events": [
@@ -231,6 +241,69 @@
     },
     {
       "ts": "2026-11-20T11:36:21.069Z",
+      "type": "context:message",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:23.489Z",
+      "type": "task:step:added",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:23.490Z",
+      "type": "task:step:execute",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:23.493Z",
+      "type": "approval:resolved",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:23.493Z",
+      "type": "tool:start",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:23.494Z",
+      "type": "shell:start",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:23.604Z",
+      "type": "shell:end",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:23.605Z",
+      "type": "tool:end",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:23.606Z",
+      "type": "task:step:completed",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:23.608Z",
       "type": "context:message",
       "taskId": null,
       "tool": null,
