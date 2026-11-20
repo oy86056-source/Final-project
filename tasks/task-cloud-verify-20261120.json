@@ -1,0 +1,44 @@
+{
+  "id": "task-cloud-verify-20261120",
+  "title": "cloud verification",
+  "goal": "Create a note in the sandbox and verify the repository",
+  "spec": {
+    "files": [
+      {
+        "path": "notes/verified.md",
+        "content": "# Verified\n\nReal cloud execution.\n",
+        "reason": "verify real file write"
+      }
+    ],
+    "verification": {
+      "command": "npm run check",
+      "reason": "verify sandbox syntax"
+    }
+  },
+  "status": "running",
+  "mode": "offline-deterministic",
+  "llmConfigured": false,
+  "requestedBy": "deployment-verification",
+  "createdAt": "2026-11-20T11:26:40.317Z",
+  "startedAt": "2026-11-20T11:26:50.395Z",
+  "finishedAt": null,
+  "updatedAt": "2026-11-20T11:26:50.431Z",
+  "progress": {
+    "step": 0,
+    "total": 0,
+    "label": "starting"
+  },
+  "steps": [],
+  "events": [],
+  "changedFiles": [],
+  "result": null,
+  "error": null,
+  "verification": null,
+  "worker": {
+    "runId": "44727663343",
+    "runUrl": "https://github.com/oy86056-source/Final-project/actions/runs/44727663343",
+    "provider": "github-actions",
+    "sandbox": "isolated"
+  },
+  "requestPath": "requests/task-cloud-verify-20261120.json"
+}
