@@ -70,18 +70,18 @@
       "reason": ""
     }
   },
-  "status": "running",
+  "status": "cancelled",
   "mode": "offline-deterministic",
   "llmConfigured": false,
   "requestedBy": "verification",
   "createdAt": "2026-11-20T11:37:50.075Z",
   "startedAt": "2026-11-20T11:38:03.217Z",
-  "finishedAt": null,
-  "updatedAt": "2026-11-20T11:38:06.467Z",
+  "finishedAt": "2026-11-20T11:38:09.218Z",
+  "updatedAt": "2026-11-20T11:38:09.219Z",
   "progress": {
     "step": 1,
     "total": 16,
-    "label": "Scan repository structure (ok)"
+    "label": "cancelled"
   },
   "steps": [
     {
@@ -172,10 +172,38 @@
       "taskId": null,
       "tool": null,
       "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:38:09.215Z",
+      "type": "task:status",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:38:09.217Z",
+      "type": "task:cancelled",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:38:09.217Z",
+      "type": "task:finished",
+      "taskId": null,
+      "tool": null,
+      "message": ""
     }
   ],
   "changedFiles": [],
-  "result": null,
+  "result": {
+    "summary": "Task cancelled after 1 step(s)",
+    "success": false,
+    "durationMs": 2776,
+    "checkpoints": [],
+    "conflicts": [],
+    "reviews": []
+  },
   "error": null,
   "verification": null,
   "worker": {
@@ -185,5 +213,6 @@
     "sandbox": "isolated"
   },
   "attempts": 0,
-  "requestPath": "requests/task-cancel-test-20261120.json"
+  "requestPath": "requests/task-cancel-test-20261120.json",
+  "internalTaskId": "task-mwownp49-9bb7c7b0"
 }
