@@ -2,6 +2,16 @@
   "version": 1,
   "tasks": [
     {
+      "id": "task-cloud-verify-20261120",
+      "title": "cloud verification",
+      "status": "running",
+      "goal": "Create a note in the sandbox and verify the repository",
+      "createdAt": "2026-11-20T11:26:40.317Z",
+      "updatedAt": "2026-11-20T11:26:50.431Z",
+      "finishedAt": null,
+      "mode": "offline-deterministic"
+    },
+    {
       "id": "task-cloud-smoke-20261120",
       "title": "cloud smoke verification",
       "status": "failed",
