@@ -1,0 +1,18 @@
+{
+  "id": "task-recovery-test-20261120",
+  "title": "recovery test",
+  "goal": "verify recovered execution",
+  "spec": {
+    "files": [
+      {
+        "path": "notes/recovered.md",
+        "content": "Recovered worker output\n"
+      }
+    ],
+    "verification": {
+      "command": "npm run check"
+    }
+  },
+  "requestedBy": "recovery-verification",
+  "createdAt": "2026-11-20T11:31:00.240Z"
+}
