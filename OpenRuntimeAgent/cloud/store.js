@@ -43,7 +43,7 @@ export function createCloudStore({ github, stateBranch = STATE_BRANCH, queueBran
   }
 
   async function listTaskIds() {
-    const entries = await github.getJson('tasks', stateBranch);
+    const entries = await github.listDirectory('tasks', stateBranch);
     if (!Array.isArray(entries)) return [];
     return entries
       .filter((entry) => entry.type === 'file' && /^task-[a-z0-9-]{6,80}\.json$/.test(entry.name))

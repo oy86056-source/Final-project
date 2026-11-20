@@ -86,6 +86,17 @@ export function createGitHubClient({
     }
   }
 
+  async function listDirectory(path, ref) {
+    const query = ref ? `?ref=${encodeURIComponent(ref)}` : '';
+    try {
+      const result = await request(`/contents/${path.split('/').map(encodeURIComponent).join('/')}${query}`);
+      return Array.isArray(result.data) ? result.data : [];
+    } catch (error) {
+      if (error.status === 404) return [];
+      throw error;
+    }
+  }
+
   async function getJson(path, ref) {
     const file = await getFile(path, ref);
     if (!file.exists) return null;
@@ -228,6 +239,7 @@ export function createGitHubClient({
     getRef,
     getFile,
     getJson,
+    listDirectory,
     putFile,
     deleteFile,
     ensureBranch,

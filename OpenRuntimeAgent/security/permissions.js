@@ -33,12 +33,12 @@ export function createApprovalGate({ mode = 'manual', prompt = null, events = nu
         requestedAt: new Date().toISOString(),
         status: 'pending'
       };
-      if (mode === 'auto') {
+      if (currentMode === 'auto') {
         const allowed = item.risk !== 'critical';
         record(id, { id, approved: allowed, reason: allowed ? 'auto-approved' : 'auto-denied critical risk' });
         return resolved.get(id);
       }
-      if (mode === 'deny') {
+      if (currentMode === 'deny') {
         record(id, { id, approved: false, reason: 'approval mode is deny' });
         return resolved.get(id);
       }

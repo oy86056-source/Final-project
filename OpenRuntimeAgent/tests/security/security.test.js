@@ -47,6 +47,17 @@ test('permissions classify destructive and network commands as critical', () => 
   assert.equal(permissions.assess({ tool: 'repo.scan' }).requiresApproval, false);
 });
 
+test('approval gate mode can be switched at runtime', async () => {
+  const gate = createApprovalGate({ mode: 'manual' });
+  const denied = await gate.request({ action: 'fs.write', risk: 'medium' });
+  assert.equal(denied.approved, false);
+  gate.mode = 'auto';
+  assert.equal(gate.mode, 'auto');
+  const approved = await gate.request({ action: 'fs.write', risk: 'medium' });
+  assert.equal(approved.approved, true);
+  gate.mode = 'manual';
+});
+
 test('auto approval mode only allows allowlisted commands and blocks external integrations', async () => {
   const { dir } = roots();
   const gate = createApprovalGate({ mode: 'auto' });

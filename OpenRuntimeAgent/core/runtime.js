@@ -432,7 +432,12 @@ export function createRuntime({
         llm: {
           configured: llmConfigured,
           healthy: llmHealthy,
-          mode: llmLive ? 'live' : 'offline-deterministic'
+          mode: llmLive ? 'live' : 'offline-deterministic',
+          detail: llmLive
+            ? 'a real completion probe succeeded'
+            : probe?.error
+              ? safeText(`completion probe did not succeed: ${probe.error}`).slice(0, 300)
+              : 'no successful completion probe is available'
         }
       },
       tasks: tasks.list(),

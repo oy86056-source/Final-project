@@ -13,6 +13,11 @@ function fakeGithub() {
   ]);
   return {
     files,
+    async listDirectory(path, ref) {
+      assert.equal(path, 'tasks');
+      assert.equal(ref, 'ora-state');
+      return [...files.keys()].filter((key) => key.startsWith('tasks/') && key !== 'tasks/index.json').map((key) => ({ name: key.split('/').pop(), type: 'file' }));
+    },
     async getJson(path, ref) {
       assert.equal(ref, 'ora-state');
       const value = files.get(path);
@@ -75,6 +80,7 @@ test('cloud store persists task records and the index', async () => {
   assert.equal(loaded.status, 'completed');
   const tasks = await store.listTasks();
   assert.deepEqual(tasks.map((item) => item.id), [task.id]);
+  assert.deepEqual(await store.listTaskIds(), [task.id]);
 });
 
 test('cloud store writes and clears cancellation markers', async () => {
