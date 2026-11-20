@@ -108,6 +108,7 @@ async function main() {
           id: step.id,
           title: step.title,
           tool: step.tool,
+          role: step.role || null,
           ok: step.ok,
           denied: Boolean(step.denied),
           error: step.error ? truncate(step.error.message || step.error, 1000) : null,

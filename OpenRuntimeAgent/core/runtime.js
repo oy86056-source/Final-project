@@ -161,6 +161,7 @@ export function createRuntime({
     const previousMode = approvalGate.mode;
     if (autoApprove) approvalGate.mode = 'auto';
     const runStarted = Date.now();
+    let stopWriteWatch = null;
     const result = {
       taskId: task.id,
       status: 'running',
@@ -194,6 +195,9 @@ export function createRuntime({
       let repaired = false;
       let aborted = false;
       let writeOccurred = false;
+      stopWriteWatch = events.on('tool:end', (event) => {
+        if (WRITE_TOOLS.has(event?.data?.name) && event?.data?.ok === true) writeOccurred = true;
+      });
       taskLoop: for (const planned of plan) {
         if (signal?.aborted) {
           aborted = true;
@@ -240,6 +244,7 @@ export function createRuntime({
           id: step.id,
           title: safeText(step.title),
           tool: planned.tool,
+          role: planned.role || null,
           ok: outcome.ok,
           denied: outcome.denied,
           error: outcome.error,
@@ -326,6 +331,7 @@ export function createRuntime({
         events.emit('task:error', { taskId: task.id, error: result.summary });
       }
     } finally {
+      stopWriteWatch?.();
       approvalGate.mode = previousMode;
       result.durationMs = Date.now() - runStarted;
     }
