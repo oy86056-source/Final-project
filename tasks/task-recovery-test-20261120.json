@@ -2,17 +2,23 @@
   "id": "task-recovery-test-20261120",
   "title": "recovery test",
   "goal": "verify recovered execution",
-  "status": "running",
+  "status": "queued",
   "mode": "offline-deterministic",
   "createdAt": "2026-11-20T11:31:00.240Z",
   "startedAt": "2026-11-20T11:31:00.240Z",
   "progress": {
-    "step": 2,
-    "total": 5,
-    "label": "interrupted"
+    "step": 0,
+    "total": 0,
+    "label": "recovered — waiting for worker"
   },
   "steps": [],
-  "events": [],
+  "events": [
+    {
+      "ts": "2026-11-20T11:36:01.903Z",
+      "type": "task:recovered",
+      "message": "Requeued after worker interruption (attempt 1)"
+    }
+  ],
   "changedFiles": [],
   "result": null,
   "error": null,
@@ -20,5 +26,7 @@
   "worker": {
     "runId": "44727663343",
     "provider": "github-actions"
-  }
+  },
+  "attempts": 1,
+  "updatedAt": "2026-11-20T11:36:01.903Z"
 }
