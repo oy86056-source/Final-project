@@ -22,11 +22,11 @@
   "createdAt": "2026-11-20T11:26:40.317Z",
   "startedAt": "2026-11-20T11:26:50.395Z",
   "finishedAt": null,
-  "updatedAt": "2026-11-20T11:26:58.762Z",
+  "updatedAt": "2026-11-20T11:27:00.963Z",
   "progress": {
-    "step": 4,
+    "step": 5,
     "total": 5,
-    "label": "Verify: npm run check (ok)"
+    "label": "Review working tree changes (ok)"
   },
   "steps": [
     {
@@ -68,6 +68,16 @@
       "denied": false,
       "error": null,
       "output": "{\"ok\":true,\"exitCode\":0,\"signal\":null,\"error\":null,\"stdout\":\"\\n> ora-cloud-sandbox@1.0.0 check\\n> node --check index.js\\n\\n\",\"stderr\":\"\",\"truncated\":false,\"timedOut\":false,\"durationMs\":162,\"command\":\"npm run check\"}"
+    },
+    {
+      "id": "step-mwow9fmc-c35aa8f2",
+      "title": "Review working tree changes",
+      "tool": "git.diff",
+      "role": "reviewer",
+      "ok": true,
+      "denied": false,
+      "error": null,
+      "output": "Not a git repository; working tree diff unavailable."
     }
   ],
   "events": [
@@ -304,6 +314,62 @@
     },
     {
       "ts": "2026-11-20T11:26:58.760Z",
+      "type": "context:message",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:27:00.949Z",
+      "type": "task:step:added",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:27:00.951Z",
+      "type": "task:step:execute",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:27:00.952Z",
+      "type": "tool:start",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:27:00.953Z",
+      "type": "shell:start",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:27:00.959Z",
+      "type": "shell:end",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:27:00.960Z",
+      "type": "tool:end",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:27:00.961Z",
+      "type": "task:step:completed",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:27:00.962Z",
       "type": "context:message",
       "taskId": null,
       "tool": null,
