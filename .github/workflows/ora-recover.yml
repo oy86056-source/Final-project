@@ -1,6 +1,8 @@
 name: ORA Recovery
 
 on:
+  repository_dispatch:
+    types: [ora-recover]
   schedule:
     - cron: '*/30 * * * *'
   workflow_dispatch:
