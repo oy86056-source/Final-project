@@ -22,14 +22,103 @@
   "createdAt": "2026-11-20T11:31:00.240Z",
   "startedAt": "2026-11-20T11:36:13.392Z",
   "finishedAt": null,
-  "updatedAt": "2026-11-20T11:36:13.427Z",
+  "updatedAt": "2026-11-20T11:36:16.136Z",
   "progress": {
-    "step": 0,
-    "total": 0,
-    "label": "starting"
+    "step": 1,
+    "total": 5,
+    "label": "Scan repository structure (ok)"
   },
-  "steps": [],
-  "events": [],
+  "steps": [
+    {
+      "id": "step-mwowlbzz-c1f14f5e",
+      "title": "Scan repository structure",
+      "tool": "repo.scan",
+      "role": "architect",
+      "ok": true,
+      "denied": false,
+      "error": null,
+      "output": "{\"root\":\"/tmp/ora-cloud-NuFuPE/task-recovery-test-20261120\",\"fileCount\":4,\"languages\":{\"Markdown\":1,\"JavaScript\":2,\"JSON\":1},\"frameworks\":[],\"packageManagers\":[],\"entryPoints\":[{\"path\":\"index.js\",\"reason\":\"index entry point\"}],\"scripts\":{\"check\":\"node --check index.js\",\"test\":\"node --test\"},\"git\":{\"isRepo\":false,\"branch\":null,\"head\":null,\"dirty\":false,\"remotes\":[]},\"warnings\":[]}"
+    }
+  ],
+  "events": [
+    {
+      "ts": "2026-11-20T11:36:16.110Z",
+      "type": "task:created",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:16.111Z",
+      "type": "task:status",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:16.112Z",
+      "type": "context:created",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:16.114Z",
+      "type": "context:message",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:16.125Z",
+      "type": "agent:plan",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:16.127Z",
+      "type": "task:step:added",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:16.129Z",
+      "type": "task:step:execute",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:16.130Z",
+      "type": "tool:start",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:16.132Z",
+      "type": "tool:end",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:16.133Z",
+      "type": "task:step:completed",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:36:16.135Z",
+      "type": "context:message",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    }
+  ],
   "changedFiles": [],
   "result": null,
   "error": null,
