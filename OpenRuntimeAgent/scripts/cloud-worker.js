@@ -40,7 +40,7 @@ async function main() {
   const controller = new AbortController();
   const events = [];
   const workspaceRoot = mkdtempSync(join(tmpdir(), 'ora-cloud-'));
-  const sandbox = createSandbox(workspaceRoot, task.id);
+  const sandbox = createSandbox({ root: workspaceRoot, taskId: task.id });
   const before = snapshotFiles(sandbox.root);
   const stateDir = join(workspaceRoot, '.ora-state-worker');
   const runId = process.env.GITHUB_RUN_ID || null;
