@@ -4,11 +4,11 @@
     {
       "id": "task-recovery-test-20261120",
       "title": "recovery test",
-      "status": "running",
+      "status": "completed",
       "goal": "verify recovered execution",
       "createdAt": "2026-11-20T11:31:00.240Z",
-      "updatedAt": "2026-11-20T11:36:26.212Z",
-      "finishedAt": null,
+      "updatedAt": "2026-11-20T11:36:28.866Z",
+      "finishedAt": "2026-11-20T11:36:28.866Z",
       "mode": "offline-deterministic"
     },
     {
