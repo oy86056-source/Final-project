@@ -22,14 +22,102 @@
   "createdAt": "2026-11-20T11:21:05.007Z",
   "startedAt": "2026-11-20T11:24:37.705Z",
   "finishedAt": null,
-  "updatedAt": "2026-11-20T11:24:37.765Z",
+  "updatedAt": "2026-11-20T11:24:40.190Z",
   "progress": {
-    "step": 0,
-    "total": 0,
-    "label": "starting"
+    "step": 1,
+    "total": 5,
+    "label": "Scan repository structure (ok)"
   },
-  "steps": [],
-  "events": [],
+  "steps": [
+    {
+      "id": "step-mwow6f04-958559ab",
+      "title": "Scan repository structure",
+      "tool": "repo.scan",
+      "ok": true,
+      "denied": false,
+      "error": null,
+      "output": "{\"root\":\"/tmp/ora-cloud-1HhI7b/task-cloud-smoke-20261120\",\"fileCount\":4,\"languages\":{\"Markdown\":1,\"JavaScript\":2,\"JSON\":1},\"frameworks\":[],\"packageManagers\":[],\"entryPoints\":[{\"path\":\"index.js\",\"reason\":\"index entry point\"}],\"scripts\":{\"check\":\"node --check index.js\",\"test\":\"node --test\"},\"git\":{\"isRepo\":false,\"branch\":null,\"head\":null,\"dirty\":false,\"remotes\":[]},\"warnings\":[]}"
+    }
+  ],
+  "events": [
+    {
+      "ts": "2026-11-20T11:24:40.160Z",
+      "type": "task:created",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:40.161Z",
+      "type": "task:status",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:40.163Z",
+      "type": "context:created",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:40.164Z",
+      "type": "context:message",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:40.179Z",
+      "type": "agent:plan",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:40.181Z",
+      "type": "task:step:added",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:40.182Z",
+      "type": "task:step:execute",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:40.184Z",
+      "type": "tool:start",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:40.186Z",
+      "type": "tool:end",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:40.187Z",
+      "type": "task:step:completed",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:40.189Z",
+      "type": "context:message",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    }
+  ],
   "changedFiles": [],
   "result": null,
   "error": null,
