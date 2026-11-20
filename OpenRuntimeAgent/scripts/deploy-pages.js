@@ -32,13 +32,23 @@ async function main() {
     'README.md': '# ORA task queue\n\nThe dashboard writes task requests here and dispatches `ora-task.yml`.\n'
   }, 'ora: initialize queue branch');
 
-  const site = await github.enablePages('gh-pages');
-  const pagesUrl = site?.html_url || `https://${github.owner}.github.io/${github.repo}/`;
+  const pagesUrl = `https://${github.owner}.github.io/${github.repo}/`;
+  let pagesEnabled = true;
+  let manualStep = null;
+  try {
+    const site = await github.enablePages('gh-pages');
+    pagesEnabled = Boolean(site);
+  } catch (error) {
+    pagesEnabled = false;
+    manualStep = `GitHub Pages could not be enabled by this token (${error.message}). In the repository Settings → Pages, select Source: Deploy from a branch, Branch: gh-pages / root, then Save.`;
+  }
 
   process.stdout.write(`${JSON.stringify({
     ok: true,
     repository: github.repository,
     pagesUrl,
+    pagesEnabled,
+    manualStep,
     branches: { pages: 'gh-pages', state: STATE_BRANCH, queue: QUEUE_BRANCH },
     publishedFiles: FILES
   }, null, 2)}\n`);

@@ -17,6 +17,9 @@ const OPERATOR_SWAPS = [
   ['||', '&&']
 ];
 
+const IDENTIFIER_RE = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
+const MAX_REPAIR_FILE_BYTES = 200000;
+
 function maskLiterals(line) {
   const masked = line.split('');
   let quote = null;
@@ -97,9 +100,14 @@ function normalizeEdits(spec = {}) {
 
 function synthesizeFromExpectations(expectations = []) {
   const edits = [];
+  const notes = [];
   const grouped = new Map();
   for (const item of expectations) {
     if (!item || typeof item.function !== 'string') continue;
+    if (!IDENTIFIER_RE.test(item.function)) {
+      notes.push(`skipped invalid expectation function name: ${String(item.function).slice(0, 80)}`);
+      continue;
+    }
     const key = item.path || `src/${item.function}.js`;
     if (!grouped.has(key)) grouped.set(key, []);
     grouped.get(key).push(item);
@@ -132,25 +140,35 @@ function synthesizeFromExpectations(expectations = []) {
       reason: `synthesize ${name} from ${items.length} verified expectation(s)`
     });
   }
-  return edits;
+  return { edits, notes };
 }
 
 export function createOfflineCoder({ tools, repo, events = null, config = {} } = {}) {
   if (!tools) throw new Error('tool registry is required for the offline coder');
   const maxAttempts = Math.max(1, Math.min(Number(config.agents?.maxRepairAttempts) || 40, 200));
+  const repairDeadlineMs = Math.max(1000, Number(config.agents?.repairDeadlineMs) || 60000);
+  const allowInferredRepairTargets = config.agents?.allowInferredRepairTargets === true;
 
   async function read(path, taskId) {
     const result = await tools.invoke('fs.read', { path }, { taskId });
-    return result.ok ? String(result.output ?? '') : null;
+    let content = result.ok ? (typeof result.data?.output === 'string' ? result.data.output : result.output) : null;
+    if (repo && typeof repo.readFile === 'function') {
+      try {
+        const full = await repo.readFile(path);
+        if (typeof full === 'string') content = full;
+      } catch {
+      }
+    }
+    return typeof content === 'string' ? content : null;
   }
 
   async function synthesize({ goal = '', spec = {}, context = {}, manifest = {} } = {}) {
     const edits = normalizeEdits(spec);
     if (edits.length) return { edits, notes: ['used explicit task specification'] };
     const generated = synthesizeFromExpectations(spec.expectations || []);
-    if (generated.length) return { edits: generated, notes: ['synthesized implementation from task expectations'] };
+    if (generated.edits.length) return { edits: generated.edits, notes: ['synthesized implementation from task expectations', ...generated.notes] };
     events?.emit('offline:synthesize', { goal: redact(String(goal)).slice(0, 200), edits: 0 });
-    return { edits: [], notes: ['no deterministic implementation rule matched; verification will drive repair'] };
+    return { edits: [], notes: ['no deterministic implementation rule matched; verification will drive repair', ...generated.notes] };
   }
 
   async function repair({ goal = '', error = '', verification = null, spec = {}, context = {}, manifest = {}, taskId = null, timeoutMs } = {}) {
@@ -158,16 +176,29 @@ export function createOfflineCoder({ tools, repo, events = null, config = {} } =
     const targets = [...new Set([
       ...(Array.isArray(spec.repairTargets) ? spec.repairTargets : []),
       ...(Array.isArray(context.paths) ? context.paths : []),
-      ...inferPathsFromError(error),
-      ...inferPathsFromError(goal)
+      ...(allowInferredRepairTargets ? inferPathsFromError(error) : []),
+      ...(allowInferredRepairTargets ? inferPathsFromError(goal) : [])
     ])].slice(0, 5);
 
     const notes = [`verification command: ${command}`];
     let attempts = 0;
+    const deadlineAt = Date.now() + repairDeadlineMs;
     for (const path of targets) {
+      if (Date.now() > deadlineAt) {
+        notes.push('repair deadline exceeded');
+        break;
+      }
       const original = await read(path, taskId);
       if (original === null) continue;
+      if (Buffer.byteLength(original, 'utf8') > MAX_REPAIR_FILE_BYTES) {
+        notes.push(`skipped ${path}: file exceeds ${MAX_REPAIR_FILE_BYTES} bytes`);
+        continue;
+      }
       for (const candidate of candidateEdits(original, path)) {
+        if (Date.now() > deadlineAt) {
+          notes.push('repair deadline exceeded');
+          break;
+        }
         if (attempts >= maxAttempts) break;
         attempts += 1;
         let revert = false;
@@ -190,9 +221,18 @@ export function createOfflineCoder({ tools, repo, events = null, config = {} } =
         } catch (failure) {
           notes.push(`candidate ${attempts} threw: ${redact(failure.message).slice(0, 200)}`);
         } finally {
-          if (revert) await tools.invoke('fs.write', { path, content: original }, { taskId });
+          if (revert) {
+            const restore = await tools.invoke('fs.write', { path, content: original }, { taskId });
+            if (!restore.ok) {
+              const message = redact(restore.error?.message || String(restore.error || 'failed to restore original file')).slice(0, 200);
+              notes.push(`restore failed: ${message}`);
+              events?.emit('offline:restore_failed', { taskId, path, attempts, error: message });
+              return { edits: [], notes, attempts, restoreFailed: true };
+            }
+          }
         }
       }
+      if (Date.now() > deadlineAt) break;
     }
     events?.emit('offline:repair_failed', { taskId, attempts });
     return { edits: [], notes: [...notes, 'no candidate edit made verification pass'], attempts };

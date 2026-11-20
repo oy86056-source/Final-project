@@ -1,6 +1,6 @@
 import { createGitHubClient } from '../cloud/github.js';
 import { createCloudStore } from '../cloud/store.js';
-import { TASK_WORKFLOW, REQUEST_PREFIX } from '../cloud/validate.js';
+import { REQUEST_PREFIX } from '../cloud/validate.js';
 
 const ACTIVE = new Set(['queued', 'in_progress', 'waiting', 'requested', 'pending']);
 
@@ -69,10 +69,10 @@ async function main() {
         message: `Requeued after worker interruption (attempt ${attempts + 1})`
       }])
     });
-    await github.dispatchWorkflow(TASK_WORKFLOW, 'main', {
+    await github.dispatch('ora-task', {
       task_id: task.id,
       request_path: requestPath
-    });
+    }, 'main');
     results.recovered.push({ id: task.id, action: 'requeued', attempt: attempts + 1 });
   }
 
