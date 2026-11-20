@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<meta name="description" content="OpenRuntimeAgent cloud console — submit and monitor real agent tasks on GitHub-hosted workers.">
+<title>OpenRuntimeAgent — Cloud Console</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="mark" aria-hidden="true">ORA</span>
+    <div>
+      <h1>OpenRuntimeAgent</h1>
+      <p>Cloud console · GitHub-hosted runtime</p>
+    </div>
+  </div>
+  <div class="badges">
+    <span class="badge badge-mode" id="modeBadge">OFFLINE · DETERMINISTIC</span>
+    <span class="badge badge-llm" id="llmBadge">LLM: DISABLED</span>
+  </div>
+</header>
+
+<main>
+  <section class="card" id="authCard">
+    <div class="card-head">
+      <h2>Connect</h2>
+      <span class="status-dot" id="connectionDot" title="disconnected"></span>
+    </div>
+    <p class="hint">The dashboard runs on GitHub Pages. Tasks are executed by a GitHub Actions worker, not by this browser or a Codespace. Sign in with a <strong>fine-grained GitHub token</strong> scoped to this repository with <code>Contents: read/write</code> and <code>Actions: read/write</code>. The token stays in this browser tab only (session storage).</p>
+    <div class="row">
+      <input id="tokenInput" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…" aria-label="GitHub token">
+      <button id="connectBtn" class="primary">Connect</button>
+    </div>
+    <p class="error" id="authError" role="alert"></p>
+    <p class="fineprint">Never use a password or a broad <code>repo</code> token here. Close the tab to discard the token.</p>
+  </section>
+
+  <section class="card" id="submitCard" hidden>
+    <div class="card-head"><h2>New task</h2><span class="chip" id="workerChip">worker: github-actions</span></div>
+    <label for="goalInput">Goal</label>
+    <textarea id="goalInput" rows="3" placeholder="e.g. Add a helper function that formats dates, then run the tests"></textarea>
+    <details class="advanced">
+      <summary>Advanced: task spec (JSON)</summary>
+      <p class="hint">Writes are confined to an isolated sandbox. Commands are restricted to a small allowlist: <code>node --version</code>, <code>npm test</code>, <code>npm run check</code>, <code>node --test</code>, <code>git status --short</code>, <code>git diff</code>, <code>pwd</code>, <code>ls -la</code>.</p>
+      <textarea id="specInput" rows="7" spellcheck="false" placeholder='{"files":[{"path":"notes/hello.md","content":"# Hello"}],"verification":{"command":"npm run check"}}'></textarea>
+    </details>
+    <div class="row">
+      <button id="submitBtn" class="primary">Submit task</button>
+      <span class="muted" id="submitStatus"></span>
+    </div>
+    <p class="error" id="submitError" role="alert"></p>
+  </section>
+
+  <section class="card" id="detailCard" hidden>
+    <div class="card-head">
+      <h2 id="detailTitle">Task</h2>
+      <button id="closeDetail" class="ghost" aria-label="Close task detail">✕</button>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+      <span class="muted" id="progressText">—</span>
+    </div>
+    <div class="meta-grid" id="detailMeta"></div>
+    <div class="actions-row">
+      <button id="refreshBtn" class="ghost">Refresh</button>
+      <button id="cancelBtn" class="danger">Cancel task</button>
+    </div>
+    <p class="error" id="detailError" role="alert"></p>
+
+    <details open><summary>Steps</summary><div id="stepsView" class="list"></div></details>
+    <details><summary>Execution events</summary><pre id="eventsView" class="output"></pre></details>
+    <details><summary>Changed files</summary><div id="filesView" class="list"></div></details>
+    <details><summary>Test / verification output</summary><pre id="verificationView" class="output"></pre></details>
+    <details><summary>Result &amp; errors</summary><pre id="resultView" class="output"></pre></details>
+  </section>
+
+  <section class="card" id="historyCard" hidden>
+    <div class="card-head">
+      <h2>Task history</h2>
+      <button id="reloadBtn" class="ghost">Reload</button>
+    </div>
+    <div class="filters" role="group" aria-label="Filter tasks">
+      <button class="filter active" data-filter="all">All</button>
+      <button class="filter" data-filter="running">Running</button>
+      <button class="filter" data-filter="completed">Completed</button>
+      <button class="filter" data-filter="failed">Failed</button>
+    </div>
+    <div id="taskList" class="list"><p class="muted">Loading…</p></div>
+  </section>
+</main>
+
+<footer>OpenRuntimeAgent · real deterministic execution · no Codespace dependency · data stored on <code>ora-state</code> branch</footer>
+<script src="./app.js"></script>
+</body>
+</html>
