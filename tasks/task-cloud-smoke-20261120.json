@@ -15,18 +15,18 @@
       "reason": "verify sandbox syntax"
     }
   },
-  "status": "running",
+  "status": "failed",
   "mode": "offline-deterministic",
   "llmConfigured": false,
   "requestedBy": "deployment-verification",
   "createdAt": "2026-11-20T11:21:05.007Z",
   "startedAt": "2026-11-20T11:24:37.705Z",
-  "finishedAt": null,
-  "updatedAt": "2026-11-20T11:24:49.336Z",
+  "finishedAt": "2026-11-20T11:24:51.597Z",
+  "updatedAt": "2026-11-20T11:24:51.597Z",
   "progress": {
     "step": 5,
     "total": 5,
-    "label": "Review working tree changes (ok)"
+    "label": "failed"
   },
   "steps": [
     {
@@ -369,17 +369,55 @@
       "taskId": null,
       "tool": null,
       "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:51.594Z",
+      "type": "task:status",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:51.596Z",
+      "type": "task:finished",
+      "taskId": null,
+      "tool": null,
+      "message": ""
     }
   ],
-  "changedFiles": [],
-  "result": null,
+  "changedFiles": [
+    {
+      "path": "notes/cloud-smoke.md",
+      "action": "created",
+      "before": null,
+      "after": "# Cloud smoke\n\nExecuted by the hosted ORA worker.\n"
+    }
+  ],
+  "result": {
+    "summary": "verification required but not satisfied: no successful tester shell.exec step followed the requested edits",
+    "success": false,
+    "durationMs": 11436,
+    "checkpoints": [
+      "ckpt-mwow6gt4-4433ebb5",
+      "ckpt-mwow6kb4-4ea45fa5"
+    ],
+    "conflicts": [],
+    "reviews": []
+  },
   "error": null,
-  "verification": null,
+  "verification": {
+    "command": "npm run check",
+    "ok": true,
+    "exitCode": 0,
+    "output": "{\"ok\":true,\"exitCode\":0,\"signal\":null,\"error\":null,\"stdout\":\"\\n> ora-cloud-sandbox@1.0.0 check\\n> node --check index.js\\n\\n\",\"stderr\":\"\",\"truncated\":false,\"timedOut\":false,\"durationMs\":135,\"command\":\"npm run check\"}",
+    "reason": "verification required but not satisfied"
+  },
   "worker": {
     "runId": "44727358854",
     "runUrl": "https://github.com/oy86056-source/Final-project/actions/runs/44727358854",
     "provider": "github-actions",
     "sandbox": "isolated"
   },
-  "requestPath": "requests/task-cloud-smoke-20261120.json"
+  "requestPath": "requests/task-cloud-smoke-20261120.json",
+  "internalTaskId": "task-mwow6ezj-1e2850aa"
 }
