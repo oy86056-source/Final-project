@@ -5,7 +5,6 @@
   const API = 'https://api.github.com';
   const STATE_BRANCH = 'ora-state';
   const QUEUE_BRANCH = 'ora-queue';
-  const WORKFLOW = 'ora-task.yml';
   const ALLOWED_COMMANDS = new Set([
     'node --version', 'npm --version', 'node --test', 'npm test', 'npm run check',
     'npm run build', 'npm run lint', 'git status --short',
@@ -187,9 +186,13 @@
         createdAt: new Date().toISOString()
       };
       await putContent(`requests/${id}.json`, `${JSON.stringify(request, null, 2)}\n`, QUEUE_BRANCH, `ora: submit ${id}`);
-      await api(`/actions/workflows/${WORKFLOW}/dispatches`, {
+      await api('/dispatches', {
         method: 'POST',
-        body: { ref: 'main', inputs: { task_id: id, request_path: `requests/${id}.json` } }
+        body: {
+          event_type: 'ora-task',
+          ref: 'main',
+          client_payload: { task_id: id, request_path: `requests/${id}.json` }
+        }
       });
       state.local[id] = {
         id, title: request.title, goal, status: 'queued', createdAt: request.createdAt,
