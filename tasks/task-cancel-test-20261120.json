@@ -1,0 +1,100 @@
+{
+  "id": "task-cancel-test-20261120",
+  "title": "cancellation test",
+  "goal": "create notes and verify cancellation",
+  "spec": {
+    "files": [
+      {
+        "path": "notes/cancel-0.md",
+        "content": "note 0\n",
+        "reason": ""
+      },
+      {
+        "path": "notes/cancel-1.md",
+        "content": "note 1\n",
+        "reason": ""
+      },
+      {
+        "path": "notes/cancel-2.md",
+        "content": "note 2\n",
+        "reason": ""
+      },
+      {
+        "path": "notes/cancel-3.md",
+        "content": "note 3\n",
+        "reason": ""
+      },
+      {
+        "path": "notes/cancel-4.md",
+        "content": "note 4\n",
+        "reason": ""
+      },
+      {
+        "path": "notes/cancel-5.md",
+        "content": "note 5\n",
+        "reason": ""
+      },
+      {
+        "path": "notes/cancel-6.md",
+        "content": "note 6\n",
+        "reason": ""
+      },
+      {
+        "path": "notes/cancel-7.md",
+        "content": "note 7\n",
+        "reason": ""
+      },
+      {
+        "path": "notes/cancel-8.md",
+        "content": "note 8\n",
+        "reason": ""
+      },
+      {
+        "path": "notes/cancel-9.md",
+        "content": "note 9\n",
+        "reason": ""
+      },
+      {
+        "path": "notes/cancel-10.md",
+        "content": "note 10\n",
+        "reason": ""
+      },
+      {
+        "path": "notes/cancel-11.md",
+        "content": "note 11\n",
+        "reason": ""
+      }
+    ],
+    "verification": {
+      "command": "npm run check",
+      "reason": ""
+    }
+  },
+  "status": "running",
+  "mode": "offline-deterministic",
+  "llmConfigured": false,
+  "requestedBy": "verification",
+  "createdAt": "2026-11-20T11:37:50.075Z",
+  "startedAt": "2026-11-20T11:38:03.217Z",
+  "finishedAt": null,
+  "updatedAt": "2026-11-20T11:38:03.786Z",
+  "progress": {
+    "step": 0,
+    "total": 0,
+    "label": "starting"
+  },
+  "steps": [],
+  "events": [],
+  "changedFiles": [],
+  "result": null,
+  "error": null,
+  "verification": null,
+  "worker": {
+    "runId": "44729175109",
+    "runUrl": "https://github.com/oy86056-source/Final-project/actions/runs/44729175109",
+    "provider": "github-actions",
+    "sandbox": "isolated"
+  },
+  "attempts": 0,
+  "requestPath": "requests/task-cancel-test-20261120.json"
+}
