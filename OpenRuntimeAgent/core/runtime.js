@@ -428,13 +428,13 @@ export function createRuntime({
         git: manifest.git,
         warnings: manifest.warnings
       },
-        capabilities: {
-          llm: {
-            configured: llmConfigured,
-            healthy: llmHealthy,
-            mode: llmLive ? 'live' : 'offline-deterministic'
-          }
-        },
+      capabilities: {
+        llm: {
+          configured: llmConfigured,
+          healthy: llmHealthy,
+          mode: llmLive ? 'live' : 'offline-deterministic'
+        }
+      },
       tasks: tasks.list(),
       agents: agents.list().map(({ id, name, purpose, tools: allowed, readOnly }) => ({ id, name, purpose, tools: allowed, readOnly })),
       tools: tools.list().map(({ name, description, risk, readOnly }) => ({ name, description, risk, readOnly })),

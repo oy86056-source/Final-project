@@ -166,10 +166,10 @@ export function createGitHubClient({
     return { created: true, sha: ref.data.object.sha };
   }
 
-  async function dispatch(eventType, clientPayload = {}, ref = 'main') {
+  async function dispatch(eventType, clientPayload = {}) {
     const result = await request('/dispatches', {
       method: 'POST',
-      body: { event_type: eventType, client_payload: clientPayload, ref }
+      body: { event_type: eventType, client_payload: clientPayload }
     });
     return result.ok;
   }
