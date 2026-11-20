@@ -2,6 +2,16 @@
   "version": 1,
   "tasks": [
     {
+      "id": "task-cancel-test-20261120",
+      "title": "cancellation test",
+      "status": "running",
+      "goal": "create notes and verify cancellation",
+      "createdAt": "2026-11-20T11:37:50.075Z",
+      "updatedAt": "2026-11-20T11:38:03.786Z",
+      "finishedAt": null,
+      "mode": "offline-deterministic"
+    },
+    {
       "id": "task-recovery-test-20261120",
       "title": "recovery test",
       "status": "completed",
