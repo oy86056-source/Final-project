@@ -1,0 +1,62 @@
+{
+  "id": "task-cancel-test-20261120",
+  "title": "cancellation test",
+  "goal": "create notes and verify cancellation",
+  "spec": {
+    "files": [
+      {
+        "path": "notes/cancel-0.md",
+        "content": "note 0\n"
+      },
+      {
+        "path": "notes/cancel-1.md",
+        "content": "note 1\n"
+      },
+      {
+        "path": "notes/cancel-2.md",
+        "content": "note 2\n"
+      },
+      {
+        "path": "notes/cancel-3.md",
+        "content": "note 3\n"
+      },
+      {
+        "path": "notes/cancel-4.md",
+        "content": "note 4\n"
+      },
+      {
+        "path": "notes/cancel-5.md",
+        "content": "note 5\n"
+      },
+      {
+        "path": "notes/cancel-6.md",
+        "content": "note 6\n"
+      },
+      {
+        "path": "notes/cancel-7.md",
+        "content": "note 7\n"
+      },
+      {
+        "path": "notes/cancel-8.md",
+        "content": "note 8\n"
+      },
+      {
+        "path": "notes/cancel-9.md",
+        "content": "note 9\n"
+      },
+      {
+        "path": "notes/cancel-10.md",
+        "content": "note 10\n"
+      },
+      {
+        "path": "notes/cancel-11.md",
+        "content": "note 11\n"
+      }
+    ],
+    "verification": {
+      "command": "npm run check"
+    }
+  },
+  "requestedBy": "verification",
+  "createdAt": "2026-11-20T11:37:50.075Z"
+}
