@@ -4,11 +4,11 @@
     {
       "id": "task-cancel-test-20261120",
       "title": "cancellation test",
-      "status": "running",
+      "status": "cancelled",
       "goal": "create notes and verify cancellation",
       "createdAt": "2026-11-20T11:37:50.075Z",
-      "updatedAt": "2026-11-20T11:38:06.467Z",
-      "finishedAt": null,
+      "updatedAt": "2026-11-20T11:38:09.219Z",
+      "finishedAt": "2026-11-20T11:38:09.218Z",
       "mode": "offline-deterministic"
     },
     {
