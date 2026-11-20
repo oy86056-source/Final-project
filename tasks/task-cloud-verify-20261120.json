@@ -15,18 +15,18 @@
       "reason": "verify sandbox syntax"
     }
   },
-  "status": "running",
+  "status": "completed",
   "mode": "offline-deterministic",
   "llmConfigured": false,
   "requestedBy": "deployment-verification",
   "createdAt": "2026-11-20T11:26:40.317Z",
   "startedAt": "2026-11-20T11:26:50.395Z",
-  "finishedAt": null,
-  "updatedAt": "2026-11-20T11:27:00.963Z",
+  "finishedAt": "2026-11-20T11:27:02.903Z",
+  "updatedAt": "2026-11-20T11:27:02.903Z",
   "progress": {
     "step": 5,
     "total": 5,
-    "label": "Review working tree changes (ok)"
+    "label": "completed"
   },
   "steps": [
     {
@@ -374,17 +374,54 @@
       "taskId": null,
       "tool": null,
       "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:27:02.900Z",
+      "type": "task:status",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:27:02.902Z",
+      "type": "task:finished",
+      "taskId": null,
+      "tool": null,
+      "message": ""
     }
   ],
-  "changedFiles": [],
-  "result": null,
+  "changedFiles": [
+    {
+      "path": "notes/verified.md",
+      "action": "created",
+      "before": null,
+      "after": "# Verified\n\nReal cloud execution.\n"
+    }
+  ],
+  "result": {
+    "summary": "Completed 5 steps with no failed tool executions",
+    "success": true,
+    "durationMs": 10435,
+    "checkpoints": [
+      "ckpt-mwow9aog-8250edb1",
+      "ckpt-mwow9dxl-abead3c9"
+    ],
+    "conflicts": [],
+    "reviews": []
+  },
   "error": null,
-  "verification": null,
+  "verification": {
+    "command": "npm run check",
+    "ok": true,
+    "exitCode": 0,
+    "output": "{\"ok\":true,\"exitCode\":0,\"signal\":null,\"error\":null,\"stdout\":\"\\n> ora-cloud-sandbox@1.0.0 check\\n> node --check index.js\\n\\n\",\"stderr\":\"\",\"truncated\":false,\"timedOut\":false,\"durationMs\":162,\"command\":\"npm run check\"}"
+  },
   "worker": {
     "runId": "44727663343",
     "runUrl": "https://github.com/oy86056-source/Final-project/actions/runs/44727663343",
     "provider": "github-actions",
     "sandbox": "isolated"
   },
-  "requestPath": "requests/task-cloud-verify-20261120.json"
+  "requestPath": "requests/task-cloud-verify-20261120.json",
+  "internalTaskId": "task-mwow992q-c77a3d24"
 }
