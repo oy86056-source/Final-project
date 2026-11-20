@@ -17,6 +17,7 @@ Coding agents are useful only when you can see what they did and stop them from 
 - **Controlled execution**: shell commands run through `/bin/bash` with a sanitized environment, output caps, timeouts, and process-group termination ([`execution/shell.js`](execution/shell.js)). File changes use backups and atomic renames and accept unified diffs ([`execution/patch.js`](execution/patch.js)).
 - **Permissions and redaction**: path confinement, risk classification, approval modes (`auto`, `manual`, `deny`), and redaction of secret-shaped values in events and tool output ([`security/permissions.js`](security/permissions.js), [`security/redaction.js`](security/redaction.js)).
 - **Providers and adapters**: an OpenAI-compatible provider implementation with a scoring router, plus a validated CLI-adapter lifecycle with five built-in adapter definitions ([`providers/router.js`](providers/router.js), [`adapters/lifecycle.js`](adapters/lifecycle.js)).
+- **Deterministic repair engine**: when a verification step fails, the runtime reads the target source, tries bounded operator-level fixes, re-runs the real verifier, keeps the first passing candidate, and restores rejected candidates ([`agents/offline-coder.js`](agents/offline-coder.js)).
 - **Durable local state**: tasks, contexts, events, and checkpoints are written under a local state directory ([`core/state.js`](core/state.js)).
 - **Local monitor**: a read-only web dashboard bound to `127.0.0.1:4173` ([`ui/server.js`](ui/server.js)).
 
@@ -41,6 +42,23 @@ node bin/ora.js task run --goal "analyze this repository" --approval auto
 
 Without `--approval auto`, an interactive terminal is required for steps that need approval. In a non-interactive shell, those steps are denied. See [Usage](docs/USAGE.md) and [Troubleshooting](docs/TROUBLESHOOTING.md).
 
+### Verified real end-to-end task
+
+```bash
+npm run e2e:real
+```
+
+This creates a disposable repo under `.ora-state-e2e/fixture` containing a real bug (`add(a, b) { return a - b; }`) and a failing test suite. The runtime scans the repo, reads the file, runs `npm test`, detects the real failure, repairs the actual source file, re-runs the suite, and persists checkpoints. The JSON report lists every check and the exact provider probe result. It exits non-zero if any check fails.
+
+### AI provider status (honest reporting)
+
+```bash
+node bin/ora.js providers check    # gateway health (auth + /models)
+node bin/ora.js providers probe    # real completion probe; reports live vs offline
+```
+
+`providers check` passing only proves the gateway accepts the configured key. `providers probe` performs a real completion. In this environment FreeLLMAPI is healthy but has no upstream provider keys, so completions return HTTP 503 `no_providers_configured`; ORA reports `mode: "offline-deterministic"` and never claims live inference. See [Troubleshooting](docs/TROUBLESHOOTING.md).
+
 ## CLI Command Reference
 
 Invoke as `node bin/ora.js <command> ...` (or `ora <command> ...` if the package bin is linked). Run `node bin/ora.js help --json` for the built-in summary.
@@ -61,6 +79,7 @@ Invoke as `node bin/ora.js <command> ...` (or `ora <command> ...` if the package
 | `tools invoke <name>` | Invoke one tool | `--args-json '<json>'`, `--approval`, `--yes`, `--json` |
 | `providers list` | List registered provider metadata | `--json` |
 | `providers check` | Run each provider's `/models` health check | `--json` |
+| `providers probe` | Perform a real completion probe and report `live` or `offline-deterministic` | `--json` |
 | `providers route` | Route a prompt through the provider router | `--prompt` / `--message`, `--provider`, `--json` |
 | `providers register` | Register a provider spec for the current process | `--args-json '{"id":"...","baseURL":"..."}'` |
 | `adapters list` | List adapter definitions and lifecycle state | `--json` |
@@ -74,6 +93,7 @@ Invoke as `node bin/ora.js <command> ...` (or `ora <command> ...` if the package
 | `config set <key> <value>` | Persist one allowlisted config key to `.ora/config.json` | see [Configuration](docs/CONFIGURATION.md) |
 | `events [type]` | Print event history | `--limit`, `--json` |
 | `smoke` | Run the generated end-to-end fixture | `--json` |
+| `npm run e2e:real` | Run the real bug-fix/repair fixture (script, not CLI) | (none) |
 | `ui` | Start the local read-only dashboard | `--port` (default `4173`), `--json` |
 | `help` | Print the built-in command and flag summary | `--json` |
 

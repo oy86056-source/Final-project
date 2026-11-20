@@ -19,6 +19,7 @@
     "test:integration": "node --test tests/integration tests/security tests/e2e",
     "check": "node scripts/check.js",
     "smoke": "node scripts/smoke.js",
+    "e2e:real": "node scripts/real-e2e.js",
     "ui": "node bin/ora.js ui",
     "deploy:sync": "node scripts/sync-source.js",
     "deploy:workflows": "node scripts/deploy-workflows.js",

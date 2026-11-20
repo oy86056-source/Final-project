@@ -34,10 +34,10 @@ export function isAllowedCommand(command) {
 
 export function validatePath(path) {
   const value = String(path || '');
-  if (!value || value.length > 200 || !SAFE_FILE.test(value)) fail(`Invalid file path: ${value.slice(0, 80)}`);
   if (value.includes('..') || value.startsWith('/') || value.includes('\\') || value.includes('\0')) {
     fail(`File path must stay inside the sandbox: ${value.slice(0, 80)}`);
   }
+  if (!value || value.length > 200 || !SAFE_FILE.test(value)) fail(`Invalid file path: ${value.slice(0, 80)}`);
   return value;
 }
 

@@ -232,6 +232,10 @@ async function main() {
       output(await runtime.providers.checkAll(), flags);
       return;
     }
+    if (subcommand === 'probe') {
+      output(await runtime.probeLLM(), flags);
+      return;
+    }
     if (subcommand === 'route') {
       const result = await runtime.providers.route({
         task: flags.prompt || flags.message || '',
