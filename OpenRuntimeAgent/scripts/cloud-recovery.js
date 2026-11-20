@@ -10,12 +10,12 @@ async function main() {
   const github = createGitHubClient({ token });
   const store = createCloudStore({ github });
   const summaries = await store.listTasks();
-  const results = { scanned: summaries.length, recovered: [], skipped: [], failed: [] };
+  const ids = new Set([...summaries.map((item) => item.id), ...await store.listTaskIds()]);
+  const results = { scanned: ids.size, recovered: [], skipped: [], failed: [] };
 
-  for (const summary of summaries) {
-    if (!['running', 'queued'].includes(summary.status)) continue;
-    const task = await store.getTask(summary.id);
-    if (!task) continue;
+  for (const id of ids) {
+    const task = await store.getTask(id);
+    if (!task || !['running', 'queued'].includes(task.status)) continue;
     const attempts = Number(task.attempts || 0);
     const runId = task.worker?.runId;
     if (runId) {

@@ -42,6 +42,14 @@ export function createCloudStore({ github, stateBranch = STATE_BRANCH, queueBran
     return record;
   }
 
+  async function listTaskIds() {
+    const entries = await github.getJson('tasks', stateBranch);
+    if (!Array.isArray(entries)) return [];
+    return entries
+      .filter((entry) => entry.type === 'file' && /^task-[a-z0-9-]{6,80}\.json$/.test(entry.name))
+      .map((entry) => entry.name.replace(/\.json$/, ''));
+  }
+
   async function readRequest(id, requestPath) {
     const path = requestPath || `${REQUEST_PREFIX}${id}.json`;
     if (!/^requests\/task-[a-z0-9-]{6,80}\.json$/.test(path)) throw new Error(`Invalid request path: ${path}`);
@@ -70,5 +78,5 @@ export function createCloudStore({ github, stateBranch = STATE_BRANCH, queueBran
     }
   }
 
-  return { getTask, listTasks, saveTask, readRequest, readCancelMarker, writeCancelMarker, stateBranch, queueBranch };
+  return { getTask, listTasks, listTaskIds, saveTask, readRequest, readCancelMarker, writeCancelMarker, stateBranch, queueBranch };
 }

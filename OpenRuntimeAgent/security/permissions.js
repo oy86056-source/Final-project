@@ -6,6 +6,7 @@ import { newId } from '../core/errors.js';
 export function createApprovalGate({ mode = 'manual', prompt = null, events = null, autoApprove = [] } = {}) {
   const pending = new Map();
   const resolved = new Map();
+  let currentMode = mode;
 
   function record(id, decision) {
     pending.delete(id);
@@ -15,7 +16,12 @@ export function createApprovalGate({ mode = 'manual', prompt = null, events = nu
   }
 
   return {
-    mode,
+    get mode() {
+      return currentMode;
+    },
+    set mode(value) {
+      currentMode = value;
+    },
     async request(request = {}) {
       const id = request.id || newId('approval');
       const item = {
