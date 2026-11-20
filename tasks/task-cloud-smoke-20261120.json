@@ -22,11 +22,11 @@
   "createdAt": "2026-11-20T11:21:05.007Z",
   "startedAt": "2026-11-20T11:24:37.705Z",
   "finishedAt": null,
-  "updatedAt": "2026-11-20T11:24:44.672Z",
+  "updatedAt": "2026-11-20T11:24:47.057Z",
   "progress": {
-    "step": 3,
+    "step": 4,
     "total": 5,
-    "label": "Write notes/cloud-smoke.md (ok)"
+    "label": "Verify: npm run check (ok)"
   },
   "steps": [
     {
@@ -55,6 +55,15 @@
       "denied": false,
       "error": null,
       "output": "{\"path\":\"notes/cloud-smoke.md\",\"action\":\"created\",\"beforeHash\":null,\"afterHash\":\"-1863665657\",\"backupPath\":null,\"diff\":\"--- a/notes/cloud-smoke.md\\n+++ b/notes/cloud-smoke.md\\n@@ -1,1 +1,4 @@\\n+# Cloud smoke\\n+\\n+Executed by the hosted ORA worker.\\n \\n\"}"
+    },
+    {
+      "id": "step-mwow6k6z-71cf31fc",
+      "title": "Verify: npm run check",
+      "tool": "shell.exec",
+      "ok": true,
+      "denied": false,
+      "error": null,
+      "output": "{\"ok\":true,\"exitCode\":0,\"signal\":null,\"error\":null,\"stdout\":\"\\n> ora-cloud-sandbox@1.0.0 check\\n> node --check index.js\\n\\n\",\"stderr\":\"\",\"truncated\":false,\"timedOut\":false,\"durationMs\":135,\"command\":\"npm run check\"}"
     }
   ],
   "events": [
@@ -228,6 +237,69 @@
     },
     {
       "ts": "2026-11-20T11:24:44.671Z",
+      "type": "context:message",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:46.908Z",
+      "type": "task:step:added",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:46.909Z",
+      "type": "task:step:execute",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:46.912Z",
+      "type": "approval:resolved",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:46.913Z",
+      "type": "tool:start",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:46.915Z",
+      "type": "shell:start",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:47.051Z",
+      "type": "shell:end",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:47.052Z",
+      "type": "tool:end",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:47.053Z",
+      "type": "task:step:completed",
+      "taskId": null,
+      "tool": null,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-20T11:24:47.055Z",
       "type": "context:message",
       "taskId": null,
       "tool": null,
